@@ -19,6 +19,7 @@ Minimal implementation of Huang et al's [music transformer](https://arxiv.org/pd
 - [Training](#training)
 - [Sampling](#sampling)
 - [Results](#results)
+- [References](#references)
 
 ## Writing a MIDI tokenizer
 
@@ -721,7 +722,7 @@ Then we use `torch.tril` and `flip` to generate a mask that zeros out the out-of
 
 ## Training
 With the model and data ready, we can write the training loop. I use wandb for logging.
-
+Although not specified in the paper, I use the lr schedule from Vaswani et. al. because it greatly stabilized training.
 ```py
 # Hyperparameters
 batch_size = 16
@@ -868,4 +869,14 @@ Here are some samples of unconditioned generation from the model:
 
 https://drive.google.com/drive/folders/1pfnRkLvkBKhrnDLLXXX8EsvmjoCZP6VE?usp=drive_link
 
-These samples don't sound as coherent as the ones in the author's blogpost because the Music Transformer used to generate those samples was trained on a much larger dataset.
+These samples don't sound as coherent as the ones in the author's blogpost because the Music Transformer used to generate those samples was trained on a much larger dataset, including thousands of hours of youtube piano transcriptions. This is something I'd like to try in the future.
+
+# References
+[1] Huang, C.-Z. A., Vaswani, A., Uszkoreit, J., Shazeer, N., Hawthorne, C., Dai, A. M., … Eck, D. (2018). An Improved Relative Self-Attention Mechanism for Transformer with Application to Music Generation. CoRR, abs/1809.04281. Retrieved from http://arxiv.org/abs/1809.04281
+
+I also referenced the following repositories during the development of this repo.
+- https://github.com/gwinndr/MusicTransformer-Pytorch
+- https://github.com/asigalov61/Tiny-Music-Transformer?tab=readme-ov-file
+- https://github.com/spectraldoy/music-transformer/blob/main/model.py
+- https://github.com/jason9693/MusicTransformer-pytorch
+- https://github.com/scpark20/Music-GPT-2/tree/master
